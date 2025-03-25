@@ -1,49 +1,70 @@
 # Multi-Threaded Server and Client System Programming
 
-Can open and close pipes. Sending IP, Port to workers, can no longer print statistics. Workers can get countries and compile statistics, send statistics to the server and I was very close to being able to wait for requests from the server. I have fixed a lot of things so the statistics and the whole process I think works well. <br/> <br/>
+This program can open and close pipes, send IP and Port to workers, and is no longer able to print statistics. Workers can receive country data, compile statistics, send them to the server, and I was very close to enabling waiting for requests from the server. I have fixed many issues, so the statistics and the overall process work as expected. 
 
-The server is multithreaded with pool where they enter queue. We open the threads which can read if the connection is from a worker or client, and when they do not accept requests they add the data to the queue. The thread function can print the statistics it has received and accept the ip, ports and the number of workers. It can also accept queries from the client and print them. There is a function for queries which however does not do anything because I have not dealt with queries. Finally there is a function that starts the links for query, statistics.<br/> <br/>
+The server is multithreaded with a thread pool where workers are queued. The threads read if the connection is from a worker or a client. When not accepting requests, they add data to the queue. The thread function can print the statistics it has received and handle IP, port, and worker count data. It can also accept client queries and print them. There is a function for handling queries, although it doesn't perform any actions yet because I haven’t worked on queries. Finally, there’s a function that starts the connections for queries and statistics.
 
-Client is single-threaded although much of the code is annotated because I could not solve some issues in multi.
+The client is single-threaded, though a significant portion of the code is commented out because I could not resolve some issues related to multi-threading.
 
-3η Άσκηση Προγραμματισμός Συστήματος
-ΑΜ: 1115201600278
-Στεβής Χαράλαμπος Αντώνιος
+---
 
-Η εργασία αποτελείται από τα εξής:
-Φάκελο BASH-> μέσα υπάρχει το shell script και δύο αρχείο με χώρες και ασθένειες
-Φάκελος MASTER -> υλικό της δεύτερης άσκησης
-    Φάκελος BUILD -> όλα τα .ο αρχεία
-    Φάκελος HEADERS -> όλα τα .h αρχεία
-    Φάκελος SRC -> όλα τα .c αρχεία
-    Φάκελος files -> αποθηκεύονται τα αρχεία των pipes
-    Makefile
-Φάκελος SERVER-> ότι χρειάζεται για να τρέξει ο σέρβερ
-    Φάκελος BUILD -> όλα τα .ο αρχεία
-    Φάκελος HEADERS -> όλα τα .h αρχεία
-    Φάκελος SRC -> όλα τα .c αρχεία
-    Makefile
-Φάκελος CLIENT -> ότι χρειαεται ο clint για να τρέξει
-    Φάκελος BUILD -> όλα τα .ο αρχεία
-    Φάκελος HEADERS -> όλα τα .h αρχεία
-    Φάκελος SRC -> όλα τα .c αρχεία
-    Φάκελος queries -> Υπάρχει ένα αρχείο κενό που εκεί θα γραφτούν τα queries
-    Makefile    
-README
+## Structure
 
-Κάθε φάκελος έχει το δικό του makefile άρα πρέπει και στους 3 να κάνουμε make.
+- **BASH Folder**: Contains the shell script and two files with countries and diseases.
+- **MASTER Folder**: Contains files from the second exercise.
+  - **BUILD Folder**: Contains all `.o` files.
+  - **HEADERS Folder**: Contains all `.h` files.
+  - **SRC Folder**: Contains all `.c` files.
+  - **files Folder**: Stores pipe files.
+  - **Makefile**
+- **SERVER Folder**: Contains everything needed to run the server.
+  - **BUILD Folder**: Contains all `.o` files.
+  - **HEADERS Folder**: Contains all `.h` files.
+  - **SRC Folder**: Contains all `.c` files.
+  - **Makefile**
+- **CLIENT Folder**: Contains everything needed for the client to run.
+  - **BUILD Folder**: Contains all `.o` files.
+  - **HEADERS Folder**: Contains all `.h` files.
+  - **SRC Folder**: Contains all `.c` files.
+  - **queries Folder**: Contains an empty file where queries will be written.
+  - **Makefile**
+- **README**: This file.
 
-Τι μπορεί να κάνει η εργασία:
-Έχω βελτιώσει κατά πολύ την δεύτερη εργασία μου και αυτά που μπορεί να κάνει ο MASTER είναι τα εξής:
-    Μπορεί να διαβάζει όλες τις χώρες και να τις στέλνει στους workers. Να ανοίγει και να κλείνει pipes. Να στελνει το IP , Port στους workers, δεν μπορεί να εκτυπώνει πλέον τα στατιστικά. Οι workers μπορούν να παιρνουν τις χώρες να φτιάχνουν στατιστικά, να στέλνουν τα στατιστικά στον server και ήμουν πολύ κοντά στο να μπορώ να περιμένω αιτήσεις από τον server. Έχω διορθώσει πολλά πράγματα οπότε τα στατιστικά και η όλη διαδικασία πιστεύω ότι λειτουργεί σωστά.
+Each folder has its own Makefile, so you need to run `make` in all three (MASTER, SERVER, CLIENT) folders.
 
-SERVER:
-    Ο σερβερ ειναι multithreaded με pool όπου μπάνουν σε queue. Ανοίγουμε τα threads τα οποία μπορούν να διαβάσουν αν η σύνδεση προέρχεται από worker ή client, και όταν δεν δέχονται αιτήματα προσθέτουν στο queue τα δεδομένα. Η συνάρτηση των threads μπορεί εκτυπώνει τα στατιστικα που έχει δεχτει , αν και το έχω σχολιάσει για να μην γίνει χαμός στο terminal, και να δέχεται τα ip,ports και τον αριθμό των workers. Επίσης μπορεί να δεχτεί τα query από τον client και να τα εκτυπώσει. Υπάρχει συνάρτηση για τα queries η οποία ωστόσο δεν κάνει κάτι γιατί δεν έχω ασχοληθεί με query. Τέλος υπάρχει συνάρτηση η οποία ξεκινάει τις συνδέσεις για query,statistics.
+---
 
-CLIENT:
-    Τον έχω κάνει single-threaded αν και μεγάλο μέρος του κώδικα είναι σχολιασμένος γιατί δεν μπορούσα να λύσω κάποια θέματα σε multi. Εννοώ ότι ο κώδικας για mutlithreaded υπάρχει ολόκληρος απλώς κάπου μπαγκάρι και για αυτό θα παρακαλούσα να διαβαστεί.
+## Features of the Program
 
-Τι δεν μπορεί να κάνει η εργασία:
-Η εργασία δεν μπορεί να επεξεργαστεί queries. Δεν μπορεί να ανοιξει επικοινωνια  από σερβερ προς workers ώστε να τους περάσει τα queries. Δεν είναι multithreaded ο client (αλλά όπως είπα υπάρχει ο κώδικας). Πολύ πιθανό να μου ξεφεύγουν και άλλα.
+I have made significant improvements to my second exercise, and here’s what the **MASTER** program can do:
+- It can read all countries and send them to the workers.
+- It can open and close pipes.
+- It sends the IP and Port to the workers, though it can no longer print the statistics.
+- Workers can receive countries, compile statistics, and send them to the server. I was very close to implementing the ability to wait for requests from the server.
+- I have fixed many things, so the statistics and the whole process seem to be working properly.
 
-Η εκτέλεση του MASTER μερικές φορές μπορεί να αποτύχει, αν συμβεί κάτι τέτοιο απλώς εκτελέστε το ξανά.
+### SERVER:
+- The server is **multithreaded** with a pool of threads that are placed in a queue.
+- Threads can read if the connection comes from a worker or a client. When they are not accepting requests, they add data to the queue.
+- The thread function can print the statistics it has received (though I commented it out to avoid cluttering the terminal).
+- It can accept IPs, ports, and the number of workers.
+- It can also accept queries from the client and print them.
+- There is a function for handling queries, though it doesn’t do anything because I haven't worked on that feature yet.
+- Finally, there’s a function that starts the connections for queries and statistics.
+
+### CLIENT:
+- The client is **single-threaded**.
+- While the multi-threaded code is written, it is commented out due to some unresolved bugs, and it would be appreciated if you could review that section.
+- The client code supports multi-threading, but due to bugs, it currently runs as a single thread.
+
+---
+
+## Limitations of the Program
+
+- The program **cannot process queries**.
+- It **cannot open communication** from the server to the workers to pass queries.
+- The **client is not multi-threaded** (though the code for multi-threading exists, but it’s currently not functioning correctly).
+- There may be other minor issues I’ve overlooked.
+
+### Notes:
+- Running **MASTER** may occasionally fail. If this happens, simply run it again.
